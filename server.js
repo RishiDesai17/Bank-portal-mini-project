@@ -2,6 +2,10 @@ const express = require('express')
 const app = express()
 const db = require('./db')
 const fs = require('fs').promises
+require('ejs')
+
+app.set('view engine', 'ejs');
+app.use(express.static("public"));
 
 const init = async() => {
     try{
