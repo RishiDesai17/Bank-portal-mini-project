@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Register</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form method="POST" class="login100-form validate-form p-l-55 p-r-55 p-t-178" style="padding-bottom: 50px;">
+					<span class="login100-form-title login-form-color">
+						Register
+					</span>
+
+					<div class="wrap-input100 validate-input m-b-11" data-validate="Please enter name">
+						<input class="input100" type="text" name="name" placeholder="Name">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Please enter username" style="margin-top: 18px;">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Please enter password" style="margin-top: 18px;">
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+                    </div>
+                    
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter phone number" style="margin-top: 18px;">
+						<input class="input100" type="tel" name="phno" placeholder="Phone number">
+						<span class="focus-input100"></span>
+                    </div>
+                    
+                    <div class="wrap-input100 validate-input" style="margin-top: 18px; margin-bottom: 18px" data-validate = "Please enter address"> 
+						<textarea class="input100" name="address" placeholder="Address" style="height: 150px; padding-top: 15px;"></textarea>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" style="background-color: darkblue;">
+							Register
+						</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<% if (locals.username_taken) { %>
+		<script>
+			alert("<%= username_taken %>")
+		</script>
+	<% } %>
+	
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/main.js"></script>
+
+</body>
+</html>
