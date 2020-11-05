@@ -9,7 +9,7 @@ exports.login = async(req, res) => {
     try{
         const { username, password } = req.body
         console.log(req.body)
-        db.query(`SELECT Username, Password FROM Customer WHERE Username="${username}"`, async(err, rows) => {
+        db.query(`SELECT Customer_id, Username, Password FROM Customer WHERE Username="${username}"`, async(err, rows) => {
             if(err){
                 console.log(err)
             }
@@ -25,9 +25,8 @@ exports.login = async(req, res) => {
                     invalid_credentials: "You have entered invalid credentials"
                 })
             }
-            res.redirect("/customer")    
+            res.redirect(`/customers/${rows[0].Customer_id}`)
         })
-
     }
     catch(err){
         console.log(err)

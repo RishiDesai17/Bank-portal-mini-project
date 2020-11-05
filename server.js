@@ -12,12 +12,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 const userRoutes = require('./routes/users');
+const customerRoutes = require('./routes/customers');
+const accountRoutes = require('./routes/accounts');
 
 app.use('/users', userRoutes);
-
-app.get("/customer", (req, res) => {
-    res.render("index")
-})
+app.use('/customers', customerRoutes);
+app.use('/accounts', accountRoutes);
 
 const init = async() => {
     try{

@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS Bank (
 
 CREATE TABLE IF NOT EXISTS Branch (
     Branch_id INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(25) NOT NULL,
     Address VARCHAR(250) NOT NULL,
     Bank INTEGER UNSIGNED NOT NULL,
     CONSTRAINT Constr_Bank_Branch_fk
@@ -96,9 +97,13 @@ CREATE TABLE IF NOT EXISTS Transaction (
     Type VARCHAR(15) NOT NULL,
     Amount INTEGER NOT NULL,
     Timestamp DATETIME NOT NULL,
-    Account INTEGER UNSIGNED NOT NULL,
+    AccountFrom INTEGER UNSIGNED NOT NULL,
+    AccountTo INTEGER UNSIGNED NOT NULL,
     CONSTRAINT Constr_AccountTransactions_Account_fk
-        FOREIGN KEY Account_fk (Account) REFERENCES Account (Account_no)
+        FOREIGN KEY AccountFrom_fk (AccountFrom) REFERENCES Account (Account_no)
+        ON DELETE CASCADE
+    CONSTRAINT Constr_AccountTransactions_Account_fk
+        FOREIGN KEY AccountTo_fk (AccountTo) REFERENCES Account (Account_no)
         ON DELETE CASCADE
 );
 
@@ -114,3 +119,9 @@ CREATE TABLE IF NOT EXISTS Staff (
         FOREIGN KEY Bank_fk (Bank) REFERENCES Bank (Bank_code)
         ON DELETE CASCADE
 );
+
+-- CREATE TRIGGER 
+-- BEFORE INSERT
+-- ON Transaction FOR EACH ROW
+-- BEGIN
+    
