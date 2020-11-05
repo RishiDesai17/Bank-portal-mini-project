@@ -18,7 +18,7 @@ exports.getOneAccount = async(req, res) => {
             console.log(accountInfo)
             db.query(`
                 SELECT * FROM Transaction
-                WHERE Account = ${id}
+                WHERE AccountFrom = ${id} OR AccountTo = ${id}
             `, (err, transactions) => {
                 if(err){
                     console.log(err)

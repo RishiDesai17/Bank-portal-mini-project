@@ -14,10 +14,12 @@ app.use(express.urlencoded({ extended: false }))
 const userRoutes = require('./routes/users');
 const customerRoutes = require('./routes/customers');
 const accountRoutes = require('./routes/accounts');
+const transactionRoutes = require('./routes/transactions');
 
 app.use('/users', userRoutes);
 app.use('/customers', customerRoutes);
 app.use('/accounts', accountRoutes);
+app.use('/transactions', transactionRoutes);
 
 const init = async() => {
     try{

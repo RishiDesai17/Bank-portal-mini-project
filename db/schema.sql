@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS Bank (
 
 CREATE TABLE IF NOT EXISTS Branch (
     Branch_id INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(25) NOT NULL,
     Address VARCHAR(250) NOT NULL,
     Bank INTEGER UNSIGNED NOT NULL,
     CONSTRAINT Constr_Bank_Branch_fk
@@ -94,15 +93,14 @@ CREATE TABLE IF NOT EXISTS Customer_Loan (
 
 CREATE TABLE IF NOT EXISTS Transaction (
     Transaction_id INTEGER UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    Type VARCHAR(15) NOT NULL,
     Amount INTEGER NOT NULL,
     Timestamp DATETIME NOT NULL,
     AccountFrom INTEGER UNSIGNED NOT NULL,
     AccountTo INTEGER UNSIGNED NOT NULL,
-    CONSTRAINT Constr_AccountTransactions_Account_fk
+    CONSTRAINT Constr_AccountTransactions_AccountFrom_fk
         FOREIGN KEY AccountFrom_fk (AccountFrom) REFERENCES Account (Account_no)
-        ON DELETE CASCADE
-    CONSTRAINT Constr_AccountTransactions_Account_fk
+        ON DELETE CASCADE,
+    CONSTRAINT Constr_AccountTransactions_AccountTo_fk
         FOREIGN KEY AccountTo_fk (AccountTo) REFERENCES Account (Account_no)
         ON DELETE CASCADE
 );
@@ -120,8 +118,24 @@ CREATE TABLE IF NOT EXISTS Staff (
         ON DELETE CASCADE
 );
 
--- CREATE TRIGGER 
--- BEFORE INSERT
--- ON Transaction FOR EACH ROW
+-- delimiter $$
+-- CREATE TRIGGER subtractBalance
+--     BEFORE INSERT
+--     ON Transaction FOR EACH ROW
 -- BEGIN
-    
+--     update Account 
+--     set Balance = Balance - new.Amount
+--     where account_no = new.AccountFrom;
+-- END $$
+-- delimiter ;
+
+-- delimiter $$
+-- CREATE TRIGGER addBalance
+--     AFTER INSERT
+--     ON Transaction FOR EACH ROW
+-- BEGIN
+--     update Account 
+--     set Balance = Balance + new.Amount
+--     where account_no = new.AccountTo;
+-- END $$
+-- delimiter ;

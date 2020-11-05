@@ -9,7 +9,7 @@
 </head>
 <body>
     <h1 class="details" id="welcome" style="text-align: center;">WELCOME!</h1>
-    <div >
+    <div>
         <div class="container" style="box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.25); padding-left: 80px; padding-right: 80px; margin-top: 6.5%;">
             <div class="row">
                 <div class="card card-header col-md-6 col-sm-12" style="margin-bottom: 9%; margin-top: 8%; background-color: #ccc;">
@@ -28,7 +28,7 @@
                                 <button class="btn btn-primary" onclick="javascript:window.location.href = `${window.location.href.split('/')[4]}/my-accounts`">View accounts</button>
                             </div>
                             <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
-                                <button class="btn btn-primary">Transfer money</button>
+                                <button class="btn btn-primary" onclick="javascript:window.location.href = `/transactions/${window.location.href.split('/')[4]}`">My Transactions</button>
                             </div>
                         </div>
                         <div class="row text-center">
@@ -44,8 +44,5 @@
             </div>
         </div>
     </div>
-    <script>
-        // console.log()
-    </script>
 </body>
 </html>

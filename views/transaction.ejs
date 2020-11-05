@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/transaction.css">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1 id="title" style="margin-bottom: 30px;">MY TRANSACTIONS</h1>
+    <div class="container">
+        <ul class="responsive-table">
+          <li class="table-header">
+            <div class="col col-1">Transaction Id</div>
+            <div class="col col-2">Amount</div>
+            <div class="col col-3">Account From</div>
+            <div class="col col-4">Account To</div>
+            <div class="col col-5">Date/Time</div>
+          </li>
+          <% transactions.forEach(transaction => { %>
+            <li class="table-row">
+                <div class="col col-1" data-label="Transaction Id"><%= transaction.Transaction_id %></div>
+                <div class="col col-2" data-label="Amount">Rs. <%= transaction.Amount %></div>
+                <div class="col col-3" data-label="Account From" style="text-align: center;"><%= transaction.AccountFrom %></div>
+                <div class="col col-4" data-label="Account To" style="text-align: center;"><%= transaction.AccountTo %></div>
+                <div class="col col-5" data-label="Date/Time"><%= transaction.Timestamp.toString().substring(4,15) + " " + transaction.Timestamp.toString().substring(16,21) %></div>
+            </li>
+          <% }) %>
+        </ul>
+    </div>
+</body>
+</html>
