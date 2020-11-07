@@ -13,12 +13,14 @@ app.use(express.urlencoded({ extended: false }))
 
 const userRoutes = require('./routes/users');
 const customerRoutes = require('./routes/customers');
+const staffRoutes = require('./routes/staff');
 const accountRoutes = require('./routes/accounts');
 const transactionRoutes = require('./routes/transactions');
 const loanRoutes = require('./routes/loans');
 
 app.use('/users', userRoutes);
 app.use('/customers', customerRoutes);
+app.use('/staff', staffRoutes);
 app.use('/accounts', accountRoutes);
 app.use('/transactions', transactionRoutes);
 app.use('/loans', loanRoutes);
