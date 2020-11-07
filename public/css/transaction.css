@@ -15,6 +15,10 @@ h2 small {
     font-size: 0.5em;
 }
 
+body {
+    font-family: 'lato', sans-serif;
+}
+
 .responsive-table li {
     border-radius: 3px;
     padding: 25px 30px;

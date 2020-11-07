@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 id="title">REQUEST LOAN</h1>
+    <div class="container" style="box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.25); padding-left: 40px; padding-right: 40px; margin-top: 6.5%;">
+        <div style="padding: 50px; display: flex; justify-content: center;">
+            <form method="POST" onsubmit="return checkform(event)" style="display: flex; align-items: center; flex-direction: column;">
+                <div class="dropdown" style="margin-bottom: 30px;">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" name="branch" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select branch
+                    </button>
+                    <div class="dropdown-menu" id="branch-dropdown" aria-labelledby="dropdownMenuButton">
+                        <% branches.forEach(branch => { %>
+                            <option class="dropdown-item" value="<%= branch.Branch_id %>" onclick="selectBranch(event)"><%= branch.BankName + " - " + branch.BranchName %></option>
+                        <% }) %>
+                    </div>
+                </div>
+        
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Rs.</span>
+                    </div>
+                    <input name="amount" id="amount" placeholder="Enter amount" aria-label="Amount">
+                    <div class="input-group-append">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-danger" style="margin-top: 20px;">Submit</button>
+            </form>
+        </div>
+    </div>
+    <% if (locals.message) { %>
+		<script>
+            alert("<%= message %>")
+            window.location.href = `/loans/${window.location.href.split("/")[5]}`
+		</script>
+    <% } %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+    <script>
+        async function checkform(event) {
+            event.preventDefault()
+            const branchId = document.getElementById('dropdownMenuButton').value
+            const amount = document.getElementById("amount").value
+            if(branchId.match(/^\d+$/) && amount.match(/^\d+$/)){
+                console.log("x")
+                const response = await fetch(`/loans/request-loan/${window.location.href.split('/')[5]}`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        amount,
+                        branch: branchId
+                    })
+                })
+                alert(await response.text())
+                window.location.href = "/loans/" + window.location.href.split('/')[5]
+            }
+            else{
+                alert("Enter values properly")
+            }
+        }
+
+        function selectBranch(event) {
+            document.getElementById('dropdownMenuButton').textContent = event.target.textContent
+            document.getElementById('dropdownMenuButton').value = event.target.value
+        }
+    </script>
+</body>
+</html>

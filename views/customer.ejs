@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/customer.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -33,10 +33,10 @@
                         </div>
                         <div class="row text-center">
                             <div class="col-md-6 col-sm-12">
-                                <button class="btn btn-success">Accepted loans</button>
+                                <button class="btn btn-success" onclick="javascript:window.location.href = `/loans/${window.location.href.split('/')[4]}`">Loans history</button>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <button class="btn btn-success">Apply for loan</button>
+                                <button class="btn btn-success" onclick="javascript:window.location.href = `/loans/request-loan/${window.location.href.split('/')[4]}`">Apply for loan</button>
                             </div>
                         </div>
                     </div>
@@ -44,5 +44,8 @@
             </div>
         </div>
     </div>
+    <script>
+        
+    </script>
 </body>
 </html>

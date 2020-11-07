@@ -15,11 +15,17 @@ const userRoutes = require('./routes/users');
 const customerRoutes = require('./routes/customers');
 const accountRoutes = require('./routes/accounts');
 const transactionRoutes = require('./routes/transactions');
+const loanRoutes = require('./routes/loans');
 
 app.use('/users', userRoutes);
 app.use('/customers', customerRoutes);
 app.use('/accounts', accountRoutes);
 app.use('/transactions', transactionRoutes);
+app.use('/loans', loanRoutes);
+
+app.get("/",(req, res) => {
+    res.redirect("/users/login")
+})
 
 const init = async() => {
     try{
