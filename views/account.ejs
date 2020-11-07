@@ -9,20 +9,20 @@
 <body>
   <h1 class="details" id="welcome" style="text-align: center;">MY ACCOUNTS OVERVIEW</h1>
     <div class="container">
-        <ul class="responsive-table">
-          <li class="table-header">
-            <div class="col col-1">Account_no</div>
-            <div class="col col-2">Balance</div>
-            <div class="col col-3">Details</div>
+      <ul class="responsive-table">
+        <li class="table-header">
+          <div class="col col-1">Account_no</div>
+          <div class="col col-2">Balance</div>
+          <div class="col col-3">Details</div>
+        </li>
+        <% accounts.forEach(account => { %>
+          <li class="table-row">
+            <div class="col col-1" data-label="Job Id"><%= account.account_no %></div>
+            <div class="col col-2" data-label="Amount">Rs. <%= account.Balance %></div>
+            <div class="col col-3" data-label="Customer Name"><a href="/accounts/my-accounts/<%= account.account_no %>">View Details</a></div>
           </li>
-          <% accounts.forEach(account => { %>
-            <li class="table-row">
-                <div class="col col-1" data-label="Job Id"><%= account.account_no %></div>
-                <div class="col col-2" data-label="Amount">Rs. <%= account.Balance %></div>
-                <div class="col col-3" data-label="Customer Name"><a href="/accounts/my-accounts/<%= account.account_no %>">View Details</a></div>
-            </li>
-          <% }) %>
-        </ul>
+        <% }) %>
+      </ul>
     </div>
 </body>
 </html>

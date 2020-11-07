@@ -36,3 +36,34 @@ exports.getOneAccount = async(req, res) => {
         console.log(err)
     }
 }
+
+exports.getBankAccountsPage = (req, res) => {
+    res.render("searchAccounts")
+}
+
+exports.getBankAccounts = (req, res) => {
+    const { bank } = req.params
+    const { name } = req.body
+    db.query(`
+        SELECT Account.Account_no, Account.Balance, Customer.Name FROM Account
+        INNER JOIN Customer_account
+        ON Account.Account_no = Customer_Account.Account
+        INNER JOIN Customer
+        ON Customer.Customer_id = Customer_Account.Customer 
+        WHERE Customer.Name LIKE CONCAT ("%", "${name}", "%") AND
+        Account.Branch IN (SELECT Branch_id FROM Branch WHERE Bank = ${bank})
+    `, (err, accounts) => {
+        if(err){
+            console.log(err)
+            return
+        }
+        console.log(accounts)
+        res.render("searchAccounts", {
+            accounts
+        })
+    })
+}
+
+exports.createAccount = (req, res) => {
+    const {  } = req.body
+}
