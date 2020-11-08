@@ -9,8 +9,9 @@
 </head>
 <body>
     <h1 class="details" id="welcome" style="text-align: center;">WELCOME!</h1>
+    <button onclick="changeMode()" style="position: absolute; right: 20px; top: 30px">MODE</button>
     <div>
-        <div class="container" style="box-shadow: 0 0px 20px 0px rgba(0, 0, 0, 0.25); padding-left: 80px; padding-right: 80px; margin-top: 6.5%;">
+        <div class="container shadow" style="padding-left: 80px; padding-right: 80px; margin-top: 6.5%;">
             <div class="row">
                 <div class="card card-header col-md-6 col-sm-12" style="margin-bottom: 9%; margin-top: 8%; background-color: #ccc;">
                     <br>
@@ -45,7 +46,21 @@
         </div>
     </div>
     <script>
-        
+        function changeMode() {
+            if(JSON.parse(localStorage.darkMode)){    
+                document.getElementsByTagName("body")[0].classList.remove("dark")
+                document.getElementsByClassName("container")[0].classList.add("shadow")
+                document.getElementsByClassName("container")[0].classList.remove("whiteShadow")
+                localStorage.setItem("darkMode", JSON.stringify(false))
+            }
+            else{
+                document.getElementsByTagName("body")[0].classList.add("dark")
+                document.getElementsByClassName("container")[0].classList.remove("shadow")
+                document.getElementsByClassName("container")[0].classList.add("whiteShadow")
+                localStorage.setItem("darkMode", JSON.stringify(true))
+            }
+        }
+        // changeMode()
     </script>
 </body>
 </html>

@@ -4,7 +4,8 @@ exports.getOneAccount = async(req, res) => {
     try{
         const { id } = req.params
         db.query(`
-            SELECT Account.Account_no, Account.Balance, Branch.Address, Bank.Name FROM Account
+            SELECT Account.Account_no, Account.Balance, Branch.Name AS BranchName, Bank.Name AS BankName
+            FROM Account
             INNER JOIN Branch
             ON Branch.Branch_id = Account.Branch
             INNER JOIN Bank

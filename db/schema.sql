@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS Loan (
     Loan_id INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     Interest INTEGER NOT NULL,
     Amount INTEGER NOT NULL,
-    Accepted BOOLEAN NOT NULL,
+    Accepted BOOLEAN,
     Branch INTEGER UNSIGNED NOT NULL,
     CONSTRAINT Constr_Branch_Loan_fk
         FOREIGN KEY Branch_fk (Branch) REFERENCES Branch (Branch_id) 

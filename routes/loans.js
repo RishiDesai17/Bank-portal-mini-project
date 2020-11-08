@@ -8,4 +8,8 @@ router.get("/request-loan/:customer", LoansController.requestLoanPage)
 
 router.post("/request-loan/:customer", LoansController.requestLoan)
 
+router.get("/requested-loans/:bank", LoansController.requestedLoans)
+
+router.patch("/loan-action", LoansController.loanAction)
+
 module.exports = router

@@ -3,7 +3,7 @@ const db = require('../db')
 exports.staffPage = (req, res) => {
     const { staff } = req.params
     db.query(`
-        SELECT Staff.Name, Staff.Post, Staff.Salary, Staff.Address, Bank.Bank_code, Bank.Name AS BankName
+        SELECT Staff.Name, Staff.Post, Staff.Salary, Staff.Address, Bank.Bank_code, Bank.Bank_code, Bank.Name AS BankName
         FROM Staff
         INNER JOIN Bank
         ON Bank.Bank_code = Staff.Bank

@@ -29,10 +29,10 @@
                 <div class="container" style="margin-top: 11%">
                     <div class="row text-center">
                         <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
-                            <button class="btn btn-primary" onclick="javascript:window.location.href = `/accounts/bank-accounts/${window.location.href.split('/')[4]}`">Search accounts</button>
+                            <button class="btn btn-primary" onclick="javascript:window.location.href = `/accounts/bank-accounts/<%= staff.Bank_code %>`">Search accounts</button>
                         </div>
                         <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
-                            <button class="btn btn-primary" onclick="javascript:window.location.href = `/transactions/${window.location.href.split('/')[4]}`">Requested Loans</button>
+                            <button class="btn btn-primary" onclick="javascript:window.location.href = `/loans/requested-loans/<%= staff.Bank_code %>`">Requested Loans</button>
                         </div>
                     </div>
                     <div class="row text-center">
