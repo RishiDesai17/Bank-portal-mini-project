@@ -35,3 +35,22 @@ exports.transaction = (req, res) => {
         })
     })
 }
+
+exports.filterByTime = (req, res) => {
+    const { customer } = req.params
+    const { start, end } = req.body
+    db.query(`
+        SELECT * FROM Transaction
+        WHERE (AccountFrom = ${customer} OR AccountTo = ${customer})
+        AND (Timestamp >= "${start}" AND Timestamp <= "${end}")
+    `, (err, transactions) => {
+        if(err){
+            console.log(err)
+            return;
+        }
+        console.log(transactions)
+        res.json({
+            transactions
+        })
+    })
+}

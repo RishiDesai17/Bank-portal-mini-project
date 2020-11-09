@@ -52,6 +52,10 @@ body {
     flex-basis: 20%;
 }
 
+.invisible{
+    display: none;
+}
+
 @media all and (max-width: 767px) {
     .responsive-table .table-header {
         display: none;

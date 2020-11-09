@@ -8,4 +8,6 @@ router.get("/account/:account", TransactionsController.transactionsPage)
 
 router.post("/account/:account", TransactionsController.transaction)
 
+router.post("/time-filter/:customer", TransactionsController.filterByTime)
+
 module.exports = router
