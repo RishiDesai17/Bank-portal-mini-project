@@ -22,6 +22,27 @@ exports.loansPage = (req, res) => {
     })
 }
 
+exports.bankLoansPage = (req, res) => {
+    const { bank } = req.params
+    db.query(`
+        SELECT Loan_id, Amount, Interest, Accepted
+        FROM Loan
+        WHERE Branch IN (SELECT Branch_id FROM Branch WHERE Bank = ${bank})
+        ORDER BY Loan_id DESC
+    `, (err, loans) => {
+        if(err){
+            console.log(err)
+            return res.render("loans", {
+                message: "Something went wrong"
+            })
+        }
+        console.log(loans)
+        res.render("loans", {
+            loans
+        })
+    })
+}
+
 exports.requestLoanPage = (req, res) => {
     db.query(`
         SELECT Branch.Branch_id, Branch.Name as BranchName, Branch.Bank, Bank.Name as BankName
