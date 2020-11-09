@@ -10,35 +10,38 @@
 <body>
     <h1 class="details" id="welcome" style="text-align: center;">WELCOME!</h1>
     <button onclick="changeMode()" style="position: absolute; right: 20px; top: 30px">MODE</button>
-    <div>
-        <div class="container shadow" style="padding-left: 80px; padding-right: 80px; margin-top: 6.5%;">
-            <div class="row">
-                <div class="card card-header col-md-6 col-sm-12" style="margin-bottom: 9%; margin-top: 8%; background-color: #ccc;">
-                    <br>
-                    <h3 class="details">NAME: <b><%= customer.Name %></b></h3>
-                    <br>
-                    <h3 class="details">USERNAME: <b><%= customer.Username %></b></h3>
-                    <br>
-                    <h3 class="details">ADDRESS: <b><%= customer.Address %></b></h3>
-                    <br>
-                </div>
-                <div class="col-md-6 col-sm-12" style="margin-top: 10%">
-                    <div class="container" style="margin-top: 11%">
-                        <div class="row text-center">
-                            <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
-                                <button class="btn btn-primary" onclick="javascript:window.location.href = `${window.location.href.split('/')[4]}/my-accounts`">View accounts</button>
-                            </div>
-                            <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
-                                <button class="btn btn-primary" onclick="javascript:window.location.href = `/transactions/${window.location.href.split('/')[4]}`">My Transactions</button>
-                            </div>
+    <div class="shadow container" style="padding-left: 80px; padding-right: 80px; margin-top: 6.5%;">
+        <div class="row">
+            <div class="card card-header col-md-6 col-sm-12" style="margin-bottom: 9%; margin-top: 8%; background-color: #ccc;">
+                <br>
+                <h3 class="details">NAME: <b><%= customer.Name %></b></h3>
+                <br>
+                <h3 class="details">USERNAME: <b><%= customer.Username %></b></h3>
+                <br>
+                <h3 class="details">ADDRESS: <b><%= customer.Address %></b></h3>
+                <br>
+            </div>
+            <div class="col-md-6 col-sm-12" style="margin-top: 8%">
+                <div class="container" style="margin-top: 11%">
+                    <div class="row text-center">
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
+                            <button class="btn btn-primary" onclick="javascript:window.location.href = `${window.location.href.split('/')[4]}/my-accounts`">View accounts</button>
                         </div>
-                        <div class="row text-center">
-                            <div class="col-md-6 col-sm-12">
-                                <button class="btn btn-success" onclick="javascript:window.location.href = `/loans/${window.location.href.split('/')[4]}`">Loans history</button>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                                <button class="btn btn-success" onclick="javascript:window.location.href = `/loans/request-loan/${window.location.href.split('/')[4]}`">Apply for loan</button>
-                            </div>
+                        <div class="col-md-6 col-sm-12" style="margin-bottom: 20px">
+                            <button class="btn btn-primary" onclick="javascript:window.location.href = `/transactions/${window.location.href.split('/')[4]}`">My Transactions</button>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-6 col-sm-12">
+                            <button class="btn btn-success" onclick="javascript:window.location.href = `/loans/${window.location.href.split('/')[4]}`">Loans history</button>
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <button class="btn btn-success" onclick="javascript:window.location.href = `/loans/request-loan/${window.location.href.split('/')[4]}`">Apply for loan</button>
+                        </div>
+                    </div>
+                    <div class="row text-center" style="margin-top: 20px;">
+                        <div class="col-md-12">
+                            <button class="btn btn-danger" onclick="javascript:window.location.href = `/accounts/create-account/${window.location.href.split('/')[4]}`">Create Account</button>
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,7 @@ exports.getOneAccount = async(req, res) => {
             INNER JOIN Branch
             ON Branch.Branch_id = Account.Branch
             INNER JOIN Bank
-            ON Bank.Bank_code = Branch.Branch_id
+            ON Bank.Bank_code = Branch.Bank
             WHERE Account_no=${id}
         `, (err, accountInfo) => {
             if(err){
@@ -65,6 +65,69 @@ exports.getBankAccounts = (req, res) => {
     })
 }
 
+exports.createAccountPage = (req, res) => {
+    db.query(`
+        SELECT Branch.Branch_id, Branch.Name as BranchName, Branch.Bank, Bank.Name as BankName
+        FROM Branch
+        INNER JOIN Bank
+        ON Branch.Bank = Bank.bank_code
+    `, (err, branches) => {
+        if(err){
+            console.log(err)
+            return res.render("loanRequest", {
+                message: "Something went wrong"
+            }) 
+        }
+        console.log(branches)
+        res.render("createAccount", {
+            branches
+        })
+    })
+}
+
 exports.createAccount = (req, res) => {
-    const {  } = req.body
+    const { customer } = req.params
+    const { type, branch } = req.body
+    db.beginTransaction(() => {
+        db.query(`INSERT INTO Account(Balance, Branch) VALUES(${5000}, ${branch})`, (err, row) => {
+            if(err){
+                console.log(err)
+                db.rollback()
+                return;
+            }
+            console.log(row)
+            const accountId = row.insertId
+            db.query(`INSERT INTO Customer_Account VALUES(${customer}, ${accountId})`, (err, row) => {
+                if(err){
+                    console.log(err)
+                    db.rollback()
+                    return;
+                }
+                if(type === "saving"){
+                    db.query(`INSERT INTO savingacc VALUES(${accountId}, ${2})`, (err, row) => {
+                        if(err){
+                            console.log(err)
+                            db.rollback()
+                            return;
+                        }
+                        console.log(row)
+                        db.commit()
+                        res.send("Account successfully created")
+                    })
+                }
+                else{
+                    db.query(`INSERT INTO currentacc VALUES(${accountId}, ${5000})`, (err, row) => {
+                        if(err){
+                            console.log(err)
+                            db.rollback()
+                            return;
+                        }
+                        console.log(row)
+                        db.commit()
+                        res.send("Account successfully created")
+                    })
+                }
+            })
+        })
+    })
 }
