@@ -2,7 +2,11 @@ const db =  require('../db')
 
 exports.customerTransactions = (req, res) => {
     const { customer } = req.params
-    db.query(`SELECT * FROM TRANSACTION WHERE AccountFrom = ${customer} OR AccountTo = ${customer}`, (err, transactions) => {
+    db.query(`
+        SELECT * FROM Transaction
+        WHERE AccountFrom IN (SELECT Account from Customer_Account WHERE Customer = ${customer})
+        OR AccountTo IN (SELECT Account from Customer_Account WHERE Customer = ${customer})`,
+    (err, transactions) => {
         if(err){
             console.log(err)
             return
