@@ -45,7 +45,8 @@ exports.filterByTime = (req, res) => {
     const { start, end } = req.body
     db.query(`
         SELECT * FROM Transaction
-        WHERE (AccountFrom = ${customer} OR AccountTo = ${customer})
+        WHERE (AccountFrom IN (SELECT Account from Customer_Account WHERE Customer = ${customer}) 
+        OR AccountTo IN (SELECT Account from Customer_Account WHERE Customer = ${customer}))
         AND (Timestamp >= "${start}" AND Timestamp <= "${end}")
     `, (err, transactions) => {
         if(err){
